@@ -5,17 +5,17 @@ This is the supplementary code for my bachelor dissertation: **Driven by Bandits
 ## Project Structure
 
 ```
-├── phase_1/          # IDM-based synthetic mobility simulations
-│   ├── flower/       # Flower app (client, server, strategies, mobility)
-│   ├── configs/      # Run-config overrides (TOML files)
-│   └── pyproject.toml
-├── phase_2/          # SUMO trace-driven mobility simulations
-│   ├── flower/       # Flower app (client, server, strategies, SUMO mobility)
-│   ├── traces/       # SUMO trace data
-│   └── pyproject.toml
+├── phase_1/           # IDM-based synthetic mobility simulations
+│   ├── flower/        # Flower app (client, server, strategies, mobility)
+│   ├── configs/       # Run-config overrides (TOML files)
+│   └── pyproject.toml # Simulation parameters
+├── phase_2/           # SUMO trace-driven mobility simulations
+│   ├── flower/        # Flower app (client, server, strategies, SUMO mobility)
+│   ├── traces/        # SUMO trace data
+│   └── pyproject.toml # Simulation parameters
 ```
 
-Both phases implement multi-armed bandit (MAB) client-selection strategies for vehicular federated learning:
+The strategies tested in this work:
 
 - **UCB** -- Upper Confidence Bound
 - **CBS** -- Communication-Based Selection
@@ -73,6 +73,11 @@ Or point to a config file (Phase 1):
 
 ```bash
 uv run flwr run . --run-config configs/gtsrb_mavfl.toml
+```
+
+You can debug simulations with the `--stream` flag to receive more information:
+```bash
+uv run flwr run . --stream
 ```
 
 
