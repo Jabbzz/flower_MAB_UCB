@@ -1,0 +1,97 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "phase1-codex"
+version = "0.1.0"
+description = "Phase 1 Flower + PyTorch baseline and MAVFL scaffold"
+license = "Apache-2.0"
+dependencies = [
+    "flwr[simulation]>=1.26.1",
+    "torch==2.8.0",
+    "torchvision==0.23.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["phase1_flower"]
+
+[tool.flwr.app]
+publisher = "niki"
+
+[tool.flwr.app.components]
+serverapp = "phase1_flower.server_app:app"
+clientapp = "phase1_flower.client_app:app"
+
+[tool.flwr.app.config]
+num-server-rounds = 150
+fraction-train = 0.5 # Only if fedavg strat is chosen
+fraction-evaluate = 0.5 # Same ^
+min-train-nodes = 2 # Same
+min-evaluate-nodes = 2 # Same
+min-available-nodes = 2 # Same
+num-clients = 300 # Overriden in .flwr config.toml
+strategy = "ucb"
+ucb-exploration = 0.05
+ucb-discount = 0.9
+mavfl-alpha = 0.6
+num-selected = 5
+local-epochs = 3
+learning-rate = 0.01 # dont touch
+batch-size = 32
+task = "gtsrb_lenet"
+use-fake-data = false
+train-samples-per-client = 200
+eval-samples-per-client = 64
+seed = 42
+road-length-m = 1000.0
+num-zones = 20
+bs-height-m = 25.0
+vehicle-speed-kmh = 60.0
+mobility-time-step-s = 0.5
+idm-max-accel = 2.5
+idm-comfort-decel = 3.0
+idm-min-gap = 2.0
+idm-time-headway = 1.0
+idm-accel-exponent = 4.0
+arrival-rate-hz = 0.14
+initial-active-vehicles = 18
+bandwidth-hz = 10000000.0
+tx-power-db = 23.0
+noise-power-db = -114.0
+bs-antenna-gain-db = 6.0
+path-loss-a = 128.1
+path-loss-b = 37.6
+gpu-frequency-ghz = 1.3
+gpu-cycles-per-bit = 240.0
+compute-normalization = 1.0
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+]
+
+
+#######################################################################
+# CONFIGURATION MIGRATION NOTICE:
+#
+# What was previously called "federation config" for SuperLink
+# connections in pyproject.toml has been renamed and moved.
+#
+# These settings are now **SuperLink connection configuration**
+# and are defined in the Flower configuration file.
+# This configuration file can be found at `~/.flwr/config.toml`
+#
+# The entries below are commented out intentionally and are kept
+# only as a migration reference.
+#
+# Docs: https://flower.ai/docs/framework/ref-flower-configuration.html
+#######################################################################
+
+# [tool.flwr.federations]
+# default = "local-sim"
+
+# [tool.flwr.federations.local-sim]
+# options.num-supernodes = 10
+# options.backend.client-resources.num-cpus = 1
+# options.backend.client-resources.num-gpus = 0

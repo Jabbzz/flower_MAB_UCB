@@ -1,0 +1,32 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.env
+
+
+# Datasets
+experiments/phase1/datasets/
+
+# Model artifacts
+*.pt
+*.pth
+*.pkl
+experiments/phase1/artifacts/
+
+# Python packaging
+*.egg-info/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+*.log
+logs/
+.env
+.mcp.json
+
+

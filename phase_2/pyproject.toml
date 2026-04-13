@@ -1,0 +1,68 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "phase2-sumo"
+version = "0.1.0"
+description = "Phase 2 SUMO trace-driven MAVFL experiments"
+license = "Apache-2.0"
+dependencies = [
+    "flwr[simulation]>=1.26.1",
+    "torch==2.8.0",
+    "torchvision==0.23.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["phase2_flower"]
+
+[tool.flwr.app]
+publisher = "niki"
+
+[tool.flwr.app.components]
+serverapp = "phase2_flower.server_app:app"
+clientapp = "phase2_flower.client_app:app"
+
+[tool.flwr.app.config]
+num-server-rounds = 10 # 150
+fraction-train = 0.5
+fraction-evaluate = 0.5
+min-train-nodes = 2
+min-evaluate-nodes = 2
+min-available-nodes = 2
+num-clients = 200               # shard pool size (phase 1: 300)
+strategy = "random"
+ucb-exploration = 0.05
+ucb-discount = 0.9
+mavfl-alpha = 0.6
+num-selected = 5
+local-epochs = 3
+learning-rate = 0.01
+batch-size = 32
+task = "gtsrb_lenet"
+use-fake-data = false
+train-samples-per-client = 200
+eval-samples-per-client = 64
+seed = 42
+
+# SUMO trace mobility
+sumo-seed = 42
+coverage-radius-m = 300.0
+bs-height-m = 25.0
+num-zones = 20
+
+# Channel model — identical to phase 1
+bandwidth-hz = 10000000.0
+tx-power-db = 23.0
+noise-power-db = -114.0
+bs-antenna-gain-db = 6.0
+path-loss-a = 128.1
+path-loss-b = 37.6
+gpu-frequency-ghz = 1.3
+gpu-cycles-per-bit = 240.0
+compute-normalization = 1.0
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+]
