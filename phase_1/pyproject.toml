@@ -14,14 +14,14 @@ dependencies = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["phase1_flower"]
+packages = ["flower_p1"]
 
 [tool.flwr.app]
 publisher = "niki"
 
 [tool.flwr.app.components]
-serverapp = "phase1_flower.server_app:app"
-clientapp = "phase1_flower.client_app:app"
+serverapp = "flower_p1.server_app:app"
+clientapp = "flower_p1.client_app:app"
 
 [tool.flwr.app.config]
 num-server-rounds = 150
