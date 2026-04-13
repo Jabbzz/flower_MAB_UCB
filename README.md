@@ -5,7 +5,6 @@ This is the supplementary code for my bachelor dissertation: **Driven by Bandits
 ## Project Structure
 
 ```
-.
 ├── phase_1/          # IDM-based synthetic mobility simulations
 │   ├── flower/       # Flower app (client, server, strategies, mobility)
 │   ├── configs/      # Run-config overrides (TOML files)
