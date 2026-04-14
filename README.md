@@ -69,7 +69,7 @@ You can override any config parameter at the command line:
 uv run flwr run . --run-config "num-server-rounds=50 strategy=ucb num-clients=300"
 ```
 
-Or point to a config file (Phase 1):
+Or point to a config file:
 
 ```bash
 uv run flwr run . --run-config configs/gtsrb_mavfl.toml
