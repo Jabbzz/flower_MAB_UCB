@@ -1,7 +1,5 @@
 """Random selection strategy (paper null hypothesis).
 
-Paper (arXiv:2410.10451v2, Section VI-A):
-    "The vehicles are selected randomly through the covering segment."
 
 This baseline samples uniformly from all vehicles currently on the road.
 It intentionally uses no position, speed, channel, or history signal.

@@ -1,8 +1,6 @@
 """Paper-grounded discounted UCB vehicle-selection strategy for MAVFL.
 
-Phase 2 change: UCB reward uses round-level utility (alpha * p^r - (1-alpha) * T~)
-instead of per-node utility.  The same reward value is assigned to every successful
-node in the round.  Dropout nodes receive -1.0.
+
 """
 
 from __future__ import annotations
@@ -172,12 +170,12 @@ class UCBStrategy(MobilityAwareStrategyBase):
             responded_nodes = set()
 
         # Phase 2 change: round-level utility for all successful nodes,
-        # -1.0 for dropout nodes.  Same reward for every successful node.
+        # -0.4 for dropout nodes.  Same reward for every successful node.
         for node_id in state.selected_nodes:
             if node_id in responded_nodes:
                 node_reward = utility  # round-level utility, not per-node
             else:
-                node_reward = -1.0
+                node_reward = -0.4
             self._discounted_counts[node_id] = self._discounted_counts.get(node_id, 0.0) + 1.0
             self._discounted_rewards[node_id] = self._discounted_rewards.get(node_id, 0.0) + node_reward
 

@@ -8,7 +8,7 @@ from torchvision.models import resnet18
 
 
 class LeNetGTSRB(nn.Module):
-    """LeNet-style model for 32x32 traffic-sign images."""
+    """LeNet-5 model for 32x32 traffic-sign images."""
 
     def __init__(self, num_classes: int = 43) -> None:
         super().__init__()

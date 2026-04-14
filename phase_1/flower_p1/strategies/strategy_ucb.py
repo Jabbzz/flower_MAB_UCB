@@ -24,7 +24,7 @@ class UCBAuditRecord:
 
 
 class UCBStrategy(MobilityAwareStrategyBase):
-    """Discounted UCB with random cold-start and finite optimistic bootstrap."""
+    """Discounted UCB with random cold-start"""
 
     strategy_name = "ucb"
 

@@ -3,8 +3,8 @@
 Channel model, physical-layer utilities, and delay functions.
 
 Extends phase 1's helpers with standalone channel/delay functions extracted
-from IDMRoadMobility.  In phase 2 the mobility class owns geometry (where is
-the vehicle?) and these helpers own RF (given a distance, what's the rate/time?).
+from IDMRoadMobility.  In phase 2 the mobility class owns geometry (vehicle pos)
+ and these helpers own RF (given a distance, what's the rate/time?).
 """
 
 from __future__ import annotations
@@ -15,7 +15,7 @@ from dataclasses import dataclass
 
 @dataclass
 class DelayParams:
-    """Physical-layer channel and computation parameters (paper §4-5).
+    """Physical-layer channel and computation parameters 
 
     Groups constants that define the wireless channel between vehicles and
     the base station, and the on-vehicle computation model.

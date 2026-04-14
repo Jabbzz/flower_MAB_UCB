@@ -24,16 +24,16 @@ serverapp = "flower_p2.server_app:app"
 clientapp = "flower_p2.client_app:app"
 
 [tool.flwr.app.config]
-num-server-rounds = 10 # 150
+num-server-rounds = 150
 fraction-train = 0.5
 fraction-evaluate = 0.5
 min-train-nodes = 2
 min-evaluate-nodes = 2
 min-available-nodes = 2
-num-clients = 200               # shard pool size (phase 1: 300)
+num-clients = 200               # shard pool size 
 strategy = "random"
-ucb-exploration = 0.05
-ucb-discount = 0.9
+ucb-exploration = 0.8
+ucb-discount = 0.95
 mavfl-alpha = 0.6
 num-selected = 5
 local-epochs = 3
@@ -41,8 +41,6 @@ learning-rate = 0.01
 batch-size = 32
 task = "gtsrb_lenet"
 use-fake-data = false
-train-samples-per-client = 200
-eval-samples-per-client = 64
 seed = 42
 
 # SUMO trace mobility
